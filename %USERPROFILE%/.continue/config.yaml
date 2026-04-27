@@ -1,0 +1,9 @@
+models:
+  - name: Gemma 4
+    provider: ollama
+    model: gemma4:e2b
+
+tabAutocompleteModel:
+  name: Gemma 4
+  provider: ollama
+  model: gemma4:e2b

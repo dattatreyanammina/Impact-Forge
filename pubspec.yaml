@@ -1,0 +1,67 @@
+name: kisan_saathi_ai
+description: "A multimodal AI advisor for small farmers in Kurnool & Rayalaseema region for Google Solution Challenge 2026."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.3.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  # AI & ML
+  google_generative_ai: ^0.4.7
+  google_mlkit_image_labeling: any
+  google_mlkit_object_detection: any
+  # tflite_v2: ^1.0.0 # Placeholder for specific leaf models
+
+  # State Management & Navigation
+  flutter_riverpod: any
+  riverpod_annotation: any
+  go_router: any
+
+  # Firebase Auth
+  firebase_core: any
+  firebase_auth: any
+  cloud_firestore: any
+  google_sign_in: any
+
+  # UI & Media
+  flutter_staggered_animations: any
+  flutter_tts: any
+  speech_to_text: any
+  image_picker: any
+  google_maps_flutter: any
+  geolocator: any
+  flutter_svg: any
+  lottie: any
+
+  # Data & Storage
+  hive: any
+  hive_flutter: any
+  path_provider: any
+  http: any
+  intl: any
+  easy_localization: any
+  connectivity_plus: any
+  shared_preferences: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  riverpod_generator: any
+  build_runner: any
+  hive_generator: any
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/animations/
+    - assets/translations/
+    - assets/models/
+  fonts: []
