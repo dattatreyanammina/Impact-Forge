@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,8 +13,12 @@ class GeminiService {
   static const String _legacyApiKeyFromEnv =
       String.fromEnvironment('GOOGLE_API_KEY');
   static const List<String> _modelCandidates = [
+    'gemini-2.5-flash-native-audio-dialog',
+    'gemini-3-flash-live',
+    'gemini-2.5-flash',
+    'gemini-2.0-flash',
+    'gemini-pro',
     'gemini-1.5-flash',
-    'gemini-1.5-flash-8b',
     'gemini-1.5-pro',
   ];
 
@@ -25,6 +30,10 @@ class GeminiService {
   GeminiService() {
     _apiKey = _apiKeyFromEnv.isNotEmpty ? _apiKeyFromEnv : _legacyApiKeyFromEnv;
     _hasApiKey = _apiKey.isNotEmpty;
+
+    if (kDebugMode) {
+      debugPrint('[GeminiService] API Key configured: $_hasApiKey (length: ${_apiKey.length})');
+    }
 
     if (!_hasApiKey) {
       _models = [];
@@ -54,9 +63,16 @@ class GeminiService {
         .toList();
 
     _chat = _models.first.startChat();
+    if (kDebugMode) {
+      debugPrint('[GeminiService] Initialized with ${_models.length} model candidates');
+    }
   }
 
   Future<String> sendMessage(String text, {List<XFile>? images}) async {
+    if (kDebugMode) {
+      debugPrint('[GeminiService.sendMessage] hasApiKey: $_hasApiKey, modelsCount: ${_models.length}');
+    }
+
     if (!_hasApiKey) {
       return _missingKeyMessage();
     }
@@ -80,14 +96,24 @@ class GeminiService {
     Object? lastError;
     final prompt = _preparePrompt(text);
 
+    if (kDebugMode) {
+      debugPrint('[GeminiService] _sendTextMessage called with text: "${text.substring(0, min(text.length, 50))}"...');
+    }
+
     for (var modelIndex = 0; modelIndex < _models.length; modelIndex++) {
       final model = _models[modelIndex];
       final modelName = _modelCandidates[modelIndex];
       for (var attempt = 0; attempt < 3; attempt++) {
         try {
+          if (kDebugMode) {
+            debugPrint('[GeminiService] Attempting $modelName (attempt ${attempt + 1}/3)');
+          }
           _chat = model.startChat();
           final response = await _chat!.sendMessage(Content.text(prompt));
           final answer = response.text?.trim();
+          if (kDebugMode) {
+            debugPrint('[GeminiService] Got response from $modelName: ${answer?.substring(0, min(answer.length ?? 0, 50)) ?? 'null'}...');
+          }
           if (answer != null && answer.isNotEmpty) {
             return answer;
           }
@@ -95,10 +121,16 @@ class GeminiService {
           lastError = error;
           _logGeminiError('text:$modelName', error);
           if (_isRetryable(error)) {
+            if (kDebugMode) {
+              debugPrint('[GeminiService] Retryable error, waiting before retry...');
+            }
             await Future.delayed(Duration(seconds: attempt + 1));
             continue;
           }
           if (_isModelUnavailable(error)) {
+            if (kDebugMode) {
+              debugPrint('[GeminiService] Model $modelName unavailable, trying next...');
+            }
             break;
           }
         }
@@ -106,9 +138,15 @@ class GeminiService {
     }
 
     if (lastError != null && _isQuotaExceeded(lastError)) {
+      if (kDebugMode) {
+        debugPrint('[GeminiService] Quota exceeded');
+      }
       return _quotaExceededMessage();
     }
 
+    if (kDebugMode) {
+      debugPrint('[GeminiService] All attempts failed, returning offline advice. Last error: $lastError');
+    }
     return _offlineAdvice(text);
   }
 
@@ -199,8 +237,12 @@ class GeminiService {
   }
 
   void _logGeminiError(String context, Object error) {
+    final errorStr = error.toString();
     if (kDebugMode) {
-      debugPrint('GeminiService [$context] error: $error');
+      debugPrint('GeminiService [$context] error: $errorStr');
+      if (error is Exception) {
+        debugPrint('GeminiService [$context] stack trace: ${StackTrace.current}');
+      }
     }
   }
 
