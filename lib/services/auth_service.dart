@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 final authServiceProvider = Provider<AuthService>((ref) {
   return AuthService();
@@ -19,14 +20,16 @@ class AuthService {
   bool _firebaseInitialized = false;
 
   AuthService() {
-    try {
+    if (Firebase.apps.isNotEmpty) {
       _auth = FirebaseAuth.instance;
       _firebaseInitialized = true;
+
       if (!kIsWeb) {
         _googleSignIn = GoogleSignIn();
       }
-    } catch (e) {
-      debugPrint('AuthService: Firebase not initialized or not supported on this platform yet: $e');
+    } else {
+      _firebaseInitialized = false;
+      debugPrint('Firebase NOT initialized yet');
     }
   }
 

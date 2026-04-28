@@ -8,14 +8,28 @@ import 'app.dart';
 import 'services/image_cache_service.dart';
 import 'services/cache_aware_http_client.dart';
 
+class AppInitializer extends StatelessWidget {
+  const AppInitializer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return EasyLocalization(
+      path: 'assets/translations',
+      supportedLocales: const [Locale('en'), Locale('te')],
+      fallbackLocale: const Locale('en'),
+      child: const ProviderScope(
+        child: KisanSaathiApp(),
+      ),
+    );
+  }
+}
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // ✅ MUST NOT be inside try-catch
+  // 🔥 CRITICAL FIX
   await FirebaseBootstrap.initialize();
 
   await EasyLocalization.ensureInitialized();
-
   await Hive.initFlutter();
   await Hive.openBox('settings');
   await Hive.openBox('cache');
@@ -23,17 +37,8 @@ void main() async {
   await ImageCacheService.initialize();
   await CacheAwareHttpClient.initialize();
 
-  runApp(
-    EasyLocalization(
-      path: 'assets/translations',
-      supportedLocales: const [Locale('en'), Locale('te')],
-      fallbackLocale: const Locale('en'),
-      startLocale: const Locale('en'),
-      child: const ProviderScope(
-        child: KisanSaathiApp(),
-      ),
-    ),
-  );
+  // 🔥 Wrap with FutureBuilder boot app
+  runApp(const AppInitializer());
 }
 
 class KisanSaathiApp extends ConsumerWidget {
