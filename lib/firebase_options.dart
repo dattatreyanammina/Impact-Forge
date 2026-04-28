@@ -42,13 +42,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyDMnDA_lUVXl8oqmmjTZAyNzNYSGKNmc8s',
-    appId: '1:937705200109:web:8265f895c9ec2f7a46efe4',
+    appId: '1:937705200109:web:24e10d2642b0022c46efe4',
     messagingSenderId: '937705200109',
     projectId: 'hack-a10bb',
     authDomain: 'hack-a10bb.firebaseapp.com',
     databaseURL: 'https://hack-a10bb-default-rtdb.firebaseio.com',
     storageBucket: 'hack-a10bb.firebasestorage.app',
-    measurementId: 'G-HWLRE3ZHDV',
+    measurementId: 'G-LVL74VB3DS',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -92,4 +92,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'hack-a10bb.firebasestorage.app',
     measurementId: 'G-LVL74VB3DS',
   );
+
 }
