@@ -316,7 +316,7 @@ class _CommunityScreenState extends ConsumerState<CommunityScreen> {
               ),
               const SizedBox(height: 12),
               DropdownButtonFormField<String>(
-                initialValue: selectedTag,
+                value: selectedTag,
                 decoration: const InputDecoration(
                   labelText: 'Tip category',
                   border: OutlineInputBorder(),
