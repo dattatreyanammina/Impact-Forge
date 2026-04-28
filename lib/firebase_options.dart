@@ -41,14 +41,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDMnDA_lUVXl8oqmmjTZAyNzNYSGKNmc8s',
-    appId: '1:937705200109:web:24e10d2642b0022c46efe4',
-    messagingSenderId: '937705200109',
-    projectId: 'hack-a10bb',
-    authDomain: 'hack-a10bb.firebaseapp.com',
-    databaseURL: 'https://hack-a10bb-default-rtdb.firebaseio.com',
-    storageBucket: 'hack-a10bb.appspot.com',
-    measurementId: 'G-LVL74VB3DS',
+    apiKey: String.fromEnvironment(
+      'FIREBASE_WEB_API_KEY',
+      defaultValue: 'AIzaSyDMnDA_lUVXl8oqmmjTZAyNzNYSGKNmc8s',
+    ),
+    appId: String.fromEnvironment(
+      'FIREBASE_WEB_APP_ID',
+      defaultValue: '1:937705200109:web:8265f895c9ec2f7a46efe4',
+    ),
+    messagingSenderId: String.fromEnvironment(
+      'FIREBASE_WEB_MESSAGING_SENDER_ID',
+      defaultValue: '937705200109',
+    ),
+    projectId: String.fromEnvironment(
+      'FIREBASE_WEB_PROJECT_ID',
+      defaultValue: 'hack-a10bb',
+    ),
+    authDomain: String.fromEnvironment(
+      'FIREBASE_WEB_AUTH_DOMAIN',
+      defaultValue: 'hack-a10bb.firebaseapp.com',
+    ),
+    databaseURL: String.fromEnvironment(
+      'FIREBASE_WEB_DATABASE_URL',
+      defaultValue: 'https://hack-a10bb-default-rtdb.firebaseio.com',
+    ),
+    storageBucket: String.fromEnvironment(
+      'FIREBASE_WEB_STORAGE_BUCKET',
+      defaultValue: 'hack-a10bb.firebasestorage.app',
+    ),
+    measurementId: String.fromEnvironment(
+      'FIREBASE_WEB_MEASUREMENT_ID',
+      defaultValue: 'G-HWLRE3ZHDV',
+    ),
   );
 
   static const FirebaseOptions android = FirebaseOptions(
