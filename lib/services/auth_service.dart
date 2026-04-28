@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
+import '../core/firebase/firebase_bootstrap.dart';
 
 final authServiceProvider = Provider<AuthService>((ref) {
   return AuthService();
@@ -20,7 +21,7 @@ class AuthService {
   bool _firebaseInitialized = false;
 
   AuthService() {
-    if (Firebase.apps.isNotEmpty) {
+    if (FirebaseBootstrap.isInitialized || Firebase.apps.isNotEmpty) {
       _auth = FirebaseAuth.instance;
       _firebaseInitialized = true;
 
@@ -29,7 +30,9 @@ class AuthService {
       }
     } else {
       _firebaseInitialized = false;
-      debugPrint('Firebase NOT initialized yet');
+      debugPrint(
+        'AuthService: Firebase not initialized. bootstrapError=${FirebaseBootstrap.initializationError}',
+      );
     }
   }
 
