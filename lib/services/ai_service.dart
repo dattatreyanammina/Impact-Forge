@@ -104,7 +104,11 @@ class GeminiService {
           final response =
               await _chat!.sendMessage(Content.text(prompt));
           final answer = response.text?.trim();
-
+          if (kDebugMode) {
+            debugPrint(
+              '[GeminiService] Got response from $modelName: ${answer?.substring(0, min(answer.length, 50)) ?? 'null'}...',
+            );
+          }
           if (answer != null && answer.isNotEmpty) {
             return answer;
           }

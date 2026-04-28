@@ -18,7 +18,7 @@ class AppTheme {
       scaffoldBackgroundColor: AppColors.background,
       
       // ─── Card Theme ────────────────────────────────────────────────
-      cardTheme: CardThemeData(
+      cardTheme: CardTheme(
         color: AppColors.cardBg,
         elevation: 0,
         shape: RoundedRectangleBorder(
@@ -141,7 +141,7 @@ class AppTheme {
       ),
       // Basic dark theme adaptation
       scaffoldBackgroundColor: const Color(0xFF0C100B),
-      cardTheme: CardThemeData(
+      cardTheme: CardTheme(
         color: const Color(0xFF161C16),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
