@@ -47,7 +47,7 @@ class DefaultFirebaseOptions {
     projectId: 'hack-a10bb',
     authDomain: 'hack-a10bb.firebaseapp.com',
     databaseURL: 'https://hack-a10bb-default-rtdb.firebaseio.com',
-    storageBucket: 'hack-a10bb.firebasestorage.app',
+    storageBucket: 'hack-a10bb.appspot.com',
     measurementId: 'G-LVL74VB3DS',
   );
 
