@@ -6,16 +6,30 @@ class FirebaseBootstrap {
   static bool _initialized = false;
   static Object? _initializationError;
 
-  static bool get isInitialized => _initialized || Firebase.apps.isNotEmpty;
+  // Only rely on our internal flag to determine initialization state.
+  // Accessing `Firebase.apps` can throw on web if the JS interop isn't ready,
+  // so provide a safe accessor for callers that need to know if any apps
+  // are available without throwing.
+  static bool get isInitialized => _initialized;
+  static bool get appsAvailable {
+    try {
+      return Firebase.apps.isNotEmpty;
+    } catch (_) {
+      return false;
+    }
+  }
+
   static Object? get initializationError => _initializationError;
 
   static Future<void> initialize() async {
-    if (_initialized || Firebase.apps.isNotEmpty) {
+    // Avoid direct `Firebase.apps` calls that may throw when the web
+    // firebase JS bindings are not yet available. Use `appsAvailable`.
+    if (_initialized || appsAvailable) {
       _initialized = true;
       return;
     }
 
-    if (Firebase.apps.isEmpty) {
+    if (!appsAvailable) {
       try {
         await Firebase.initializeApp(
           options: DefaultFirebaseOptions.currentPlatform,

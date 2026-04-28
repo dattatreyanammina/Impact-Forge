@@ -12,9 +12,8 @@ import 'package:image_picker/image_picker.dart';
 final aiServiceProvider = Provider((ref) => GeminiService());
 
 class GeminiService {
-  // ✅ USING HARDCODED KEY
   static const String _apiKeyFromEnv = ApiKeys.geminiApiKey;
-  static const String _legacyApiKeyFromEnv = '';
+  static const String _legacyApiKeyFromEnv = ApiKeys.geminiLegacyApiKey;
 
   static const List<String> _modelCandidates = [
     'gemini-2.5-flash-native-audio-dialog',
@@ -32,8 +31,9 @@ class GeminiService {
   ChatSession? _chat;
 
   GeminiService() {
-    _apiKey =
-        _apiKeyFromEnv.isNotEmpty ? _apiKeyFromEnv : _legacyApiKeyFromEnv;
+    _apiKey = _apiKeyFromEnv.isNotEmpty
+      ? _apiKeyFromEnv
+      : _legacyApiKeyFromEnv;
     _hasApiKey = _apiKey.isNotEmpty;
 
     if (kDebugMode) {
@@ -82,6 +82,11 @@ class GeminiService {
       }
       return await _sendTextMessage(text);
     } catch (error) {
+      final configuredError = _configuredErrorMessage(error);
+      if (configuredError != null) {
+        return configuredError;
+      }
+
       if (_isQuotaExceeded(error)) {
         return _quotaExceededMessage();
       }
@@ -217,7 +222,7 @@ class GeminiService {
   }
 
   String _missingKeyMessage() {
-    return 'Gemini API key missing.';
+    return 'Gemini API key missing. Run with --dart-define=GEMINI_API_KEY=your_key and rebuild.';
   }
 
   String _quotaExceededMessage() {
@@ -226,5 +231,30 @@ class GeminiService {
 
   String _offlineAdvice(String text, {bool hasImage = false}) {
     return 'AI service is temporarily busy. Please retry.';
+  }
+
+  String? _configuredErrorMessage(Object error) {
+    final message = error.toString().toLowerCase();
+
+    if (message.contains('api key not valid') ||
+        message.contains('invalid api key') ||
+        message.contains('api_key_invalid')) {
+      return 'Gemini API key is invalid. Please verify GEMINI_API_KEY and rebuild.';
+    }
+
+    if (message.contains('permission denied') ||
+        message.contains('request had insufficient authentication scopes') ||
+        message.contains('api has not been used') ||
+        message.contains('generativelanguage')) {
+      return 'Gemini API is not enabled for this key/project. Enable Generative Language API and try again.';
+    }
+
+    if (message.contains('referer') ||
+        message.contains('referrer') ||
+        message.contains('ip address')) {
+      return 'Gemini key restriction blocked this request. Add this host in key restrictions and try again.';
+    }
+
+    return null;
   }
 }

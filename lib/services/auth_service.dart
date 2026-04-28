@@ -21,7 +21,7 @@ class AuthService {
   bool _firebaseInitialized = false;
 
   AuthService() {
-    if (FirebaseBootstrap.isInitialized || Firebase.apps.isNotEmpty) {
+    if (FirebaseBootstrap.isInitialized || FirebaseBootstrap.appsAvailable) {
       _auth = FirebaseAuth.instance;
       _firebaseInitialized = true;
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import '../../../core/firebase/firebase_bootstrap.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../../../services/auth_service.dart';
@@ -9,7 +10,7 @@ import '../../../core/theme/app_colors.dart';
 // --------------- Providers ---------------
 
 final communityPostsStreamProvider = StreamProvider<List<CommunityPost>>((ref) {
-  if (Firebase.apps.isEmpty) {
+  if (!FirebaseBootstrap.isInitialized && !FirebaseBootstrap.appsAvailable) {
     return Stream.error(
       'Firebase is not initialized. Configure Firebase and restart the app.',
     );
