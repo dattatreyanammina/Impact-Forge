@@ -41,15 +41,14 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDMnDA_lUVXl8oqmmjTZAyNzNYSGKNmc8s',
-    appId: '1:937705200109:web:24e10d2642b0022c46efe4',
-    messagingSenderId: '937705200109',
-    projectId: 'hack-a10bb',
-    authDomain: 'hack-a10bb.firebaseapp.com',
-    databaseURL: 'https://hack-a10bb-default-rtdb.firebaseio.com',
-    storageBucket: 'hack-a10bb.firebasestorage.app',
-    measurementId: 'G-LVL74VB3DS',
-  );
+      apiKey: "AIzaSyDMnDA_lUVXl8oqmmjTZAyNzNYSGKNmc8s",
+      authDomain: "hack-a10bb.firebaseapp.com",
+      databaseURL: "https://hack-a10bb-default-rtdb.firebaseio.com",
+      projectId: "hack-a10bb",
+      storageBucket: "hack-a10bb.firebasestorage.app",
+      messagingSenderId: "937705200109",
+      appId: "1:937705200109:web:8265f895c9ec2f7a46efe4",
+      measurementId: "G-HWLRE3ZHDV");
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBpWf5G-Xav5lT3FoDzoyXQwonIKNB8R9k',
@@ -57,7 +56,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '937705200109',
     projectId: 'hack-a10bb',
     databaseURL: 'https://hack-a10bb-default-rtdb.firebaseio.com',
-    storageBucket: 'hack-a10bb.firebasestorage.app',
+    storageBucket: 'hack-a10bb.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -66,8 +65,9 @@ class DefaultFirebaseOptions {
     messagingSenderId: '937705200109',
     projectId: 'hack-a10bb',
     databaseURL: 'https://hack-a10bb-default-rtdb.firebaseio.com',
-    storageBucket: 'hack-a10bb.firebasestorage.app',
-    iosClientId: '937705200109-9ne82lcfipltmb3u94nvegpgltpsmrum.apps.googleusercontent.com',
+    storageBucket: 'hack-a10bb.appspot.com',
+    iosClientId:
+        '937705200109-9ne82lcfipltmb3u94nvegpgltpsmrum.apps.googleusercontent.com',
     iosBundleId: 'com.example.kisanSaathiAi',
   );
 
@@ -77,8 +77,9 @@ class DefaultFirebaseOptions {
     messagingSenderId: '937705200109',
     projectId: 'hack-a10bb',
     databaseURL: 'https://hack-a10bb-default-rtdb.firebaseio.com',
-    storageBucket: 'hack-a10bb.firebasestorage.app',
-    iosClientId: '937705200109-9ne82lcfipltmb3u94nvegpgltpsmrum.apps.googleusercontent.com',
+    storageBucket: 'hack-a10bb.appspot.com',
+    iosClientId:
+        '937705200109-9ne82lcfipltmb3u94nvegpgltpsmrum.apps.googleusercontent.com',
     iosBundleId: 'com.example.kisanSaathiAi',
   );
 
@@ -89,8 +90,7 @@ class DefaultFirebaseOptions {
     projectId: 'hack-a10bb',
     authDomain: 'hack-a10bb.firebaseapp.com',
     databaseURL: 'https://hack-a10bb-default-rtdb.firebaseio.com',
-    storageBucket: 'hack-a10bb.firebasestorage.app',
+    storageBucket: 'hack-a10bb.appspot.com',
     measurementId: 'G-LVL74VB3DS',
   );
-
 }
