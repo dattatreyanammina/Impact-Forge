@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "937705200109",
+    "firebase_url": "https://hack-a10bb-default-rtdb.firebaseio.com",
+    "project_id": "hack-a10bb",
+    "storage_bucket": "hack-a10bb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:937705200109:android:9b7989d794b0564246efe4",
+        "android_client_info": {
+          "package_name": "com.example.kisan_saathi_ai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "937705200109-8t5g1l3no8jc56vv51st3hfn77bsu7bq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpWf5G-Xav5lT3FoDzoyXQwonIKNB8R9k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "937705200109-8t5g1l3no8jc56vv51st3hfn77bsu7bq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
