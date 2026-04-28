@@ -273,7 +273,8 @@ void _addParsedPrice(
   required double prevPrice,
   required String lastArrival,
 }) {
-  final split = commodityText.split(' - ');
+  final cleanedCommodityText = _stripMarkdownLinkText(commodityText);
+  final split = cleanedCommodityText.split(' - ');
   final commodity = split.first.trim();
   final variety = split.length > 1 ? split.sublist(1).join(' - ').trim() : '';
 
@@ -291,6 +292,15 @@ void _addParsedPrice(
       sourceUrl: sourceUrl,
     ),
   );
+}
+
+String _stripMarkdownLinkText(String value) {
+  final markdownMatch = RegExp(r'^\[(.+)\]\((.+)\)$').firstMatch(value.trim());
+  if (markdownMatch != null) {
+    return markdownMatch.group(1)!.trim();
+  }
+
+  return value.trim();
 }
 
 List<String> _produceAliases(String query) {

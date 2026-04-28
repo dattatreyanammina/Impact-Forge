@@ -317,6 +317,8 @@ class _MarketPriceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sourceHost = Uri.tryParse(price.sourceUrl)?.host;
+
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -352,12 +354,24 @@ class _MarketPriceCard extends StatelessWidget {
                   children: [
                     Text(
                       price.displayName,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: AppColors.textPrimary,
                       ),
                     ),
+                    if (price.variety.isNotEmpty) ...[
+                      const SizedBox(height: 4),
+                      Text(
+                        price.variety,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: AppColors.textSecondary,
+                        ),
+                      ),
+                    ],
                     const SizedBox(height: 3),
                     Text(
                       price.market,
@@ -404,7 +418,7 @@ class _MarketPriceCard extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            'Source: ${price.sourceUrl}',
+            'Source: ${sourceHost != null && sourceHost.isNotEmpty ? sourceHost : 'Live source'}',
             style: const TextStyle(
               fontSize: 11,
               color: AppColors.textMuted,
