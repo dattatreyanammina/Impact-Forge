@@ -30,6 +30,13 @@
             {
               "client_id": "937705200109-8t5g1l3no8jc56vv51st3hfn77bsu7bq.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "937705200109-9ne82lcfipltmb3u94nvegpgltpsmrum.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.kisanSaathiAi"
+              }
             }
           ]
         }
