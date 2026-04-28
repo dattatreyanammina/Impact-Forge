@@ -41,14 +41,14 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-      apiKey: "AIzaSyDMnDA_lUVXl8oqmmjTZAyNzNYSGKNmc8s",
-      authDomain: "hack-a10bb.firebaseapp.com",
-      databaseURL: "https://hack-a10bb-default-rtdb.firebaseio.com",
-      projectId: "hack-a10bb",
-      storageBucket: "hack-a10bb.firebasestorage.app",
-      messagingSenderId: "937705200109",
-      appId: "1:937705200109:web:8265f895c9ec2f7a46efe4",
-      measurementId: "G-HWLRE3ZHDV");
+    apiKey: "AIzaSyDMnDA_lUVXl8oqmmjTZAyNzNYSGKNmc8s",
+    authDomain: "hack-a10bb.firebaseapp.com",
+    projectId: "hack-a10bb",
+    storageBucket: "hack-a10bb.appspot.com", // ✅ FIXED
+    messagingSenderId: "937705200109",
+    appId: "1:937705200109:web:8265f895c9ec2f7a46efe4",
+    measurementId: "G-HWLRE3ZHDV",
+  );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBpWf5G-Xav5lT3FoDzoyXQwonIKNB8R9k',
