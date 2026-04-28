@@ -4,7 +4,7 @@ import '../../firebase_options.dart';
 class FirebaseBootstrap {
   static Future<void> initialize() async {
     await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.web,
+      options: DefaultFirebaseOptions.currentPlatform,
     );
   }
 }
