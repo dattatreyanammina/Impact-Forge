@@ -11,27 +11,16 @@ import 'services/cache_aware_http_client.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Firebase initialization:
-  // - Web can use --dart-define keys (see FirebaseBootstrap)
-  // - Android/iOS can use platform config files from Firebase console
-  try {
-    await FirebaseBootstrap.initialize();
-  } catch (e) {
-    debugPrint('Firebase initialization failed: $e');
-  }
+  // ✅ MUST NOT be inside try-catch
+  await FirebaseBootstrap.initialize();
 
-  // Localization
   await EasyLocalization.ensureInitialized();
 
-  // Initialize Hive for offline support
   await Hive.initFlutter();
   await Hive.openBox('settings');
   await Hive.openBox('cache');
 
-  // Initialize image cache service
   await ImageCacheService.initialize();
-
-  // Initialize cache-aware HTTP client
   await CacheAwareHttpClient.initialize();
 
   runApp(
